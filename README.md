@@ -46,6 +46,12 @@ npm run dev
 
 # Install globally
 npm link
+
+# OR single liner
+## colored output
+npm run build && npm unlink --location=global && npm link --force && aski --priority High --tags people
+## no_color
+npm run build && npm unlink --location=global && npm link --force && aski --priority High --tags people --no_color
 ```
 
 ### Usage
@@ -67,7 +73,7 @@ ask_questions --who engineer
 ask_questions --priority High --tags culture --who engineer
 
 # Disable colored output
-ask_questions --no-color
+ask_questions --no_color
 ```
 
 ### Features

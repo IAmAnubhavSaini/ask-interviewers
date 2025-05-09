@@ -2,9 +2,8 @@
 
 import { Command } from "commander";
 import { black, blue, cyan, green, magenta, red, white, yellow } from "./colors.js";
-import type { tQuestionsEntity, tPriority } from "./data/questions.d.ts";
-import { data } from "./data/questions.js";
-
+import type { tQuestionsEntity, tPriority } from "./questions.js";
+import { data } from "./questions.js";
 
 const program = new Command();
 program.name("ask_questions").description("CLI tool for interview questions").version("1.0.0");
@@ -14,10 +13,12 @@ program
     .option("-t, --tags <tags...>", "Filter by tags")
     .option("-w, --who <who...>", "Filter by who")
     .option("-a, --all", "Show all questions")
-    .option("-c, --color", "Enable colored output", true);
+    .option("-b, --no_color", "Disable colored output (bland)", false);
 
 program.parse();
 const options = program.opts();
+
+console.log({ options });
 
 const qs = filterQuestions(data.questions, options);
 sortByPriority(qs)
@@ -42,27 +43,41 @@ export function filterQuestions(questions: tQuestionsEntity[], options: any): tQ
 }
 
 function getPriorityColor(priority: tPriority): string {
-    const colors = {
-        Top: red,
-        High: yellow,
-        Mid: blue,
-        Low: green,
-        No: black,
-        unassigned: white,
-    };
-    return colors[priority]?.(priority) || priority;
+    switch (priority.toLocaleLowerCase()) {
+        case "top":
+            return red(priority);
+        case "high":
+            return yellow(priority);
+        case "mid":
+            return blue(priority);
+        case "low":
+            return green(priority);
+        case "no":
+            return black(priority);
+        case "unassigned":
+            return white(priority);
+        default:
+            return priority;
+    }
 }
 
 function getPriorityWeight(priority: tPriority): number {
-    const weights = {
-        Top: 0,
-        High: 1,
-        Mid: 2,
-        Low: 3,
-        No: 4,
-        unassigned: 5,
-    };
-    return weights[priority] ?? 6;
+    switch (priority.toLocaleLowerCase()) {
+        case "top":
+            return 0;
+        case "high":
+            return 10;
+        case "mid":
+            return 20;
+        case "low":
+            return 30;
+        case "no":
+            return 40;
+        case "unassigned":
+            return 100;
+        default:
+            return 1000;
+    }
 }
 
 export function sortByPriority(questions: tQuestionsEntity[]): tQuestionsEntity[] {
@@ -70,26 +85,30 @@ export function sortByPriority(questions: tQuestionsEntity[]): tQuestionsEntity[
 }
 
 function prettyPrintQuestion(question: Partial<tQuestionsEntity>, index: number, options: any): void {
-    const priority = options.color ? getPriorityColor(question.priority as tPriority) : question.priority;
+    const priority = options.no_color
+        ? question.priority
+        : getPriorityColor(question.priority as tPriority) ;
     console.log(`\n[${priority}]`);
     console.log(`${index + 1}. ${question.question}`);
 
     if (question.tags?.length ?? -1 > 0) {
-        const tags = options.color ? cyan(question.tags?.join(" ") ?? "") : question.tags?.join(" ") ?? "";
+        const tags = options.no_color
+            ? question.tags?.join(" ") ?? ""
+            : cyan(question.tags?.join(" ") ?? "") ;
         console.log(`\t${tags}`);
     }
 
     if (question.followups?.length ?? -1 > 0) {
-        const followups = options.color
-            ? question.followups?.map((f) => magenta(f)).join("\n\t")
-            : question.followups?.join("\n\t");
+        const followups = options.no_color
+            ? question.followups?.join("\n\t")
+            : question.followups?.map((f): string => magenta(f)).join("\n\t");
         console.log(`\t${followups}`);
     }
 
     if (question.references?.length ?? -1 > 0) {
-        const references = options.color
-            ? question.references?.map((r) => black(r)).join("\n\t")
-            : question.references?.join("\n\t");
+        const references = options.no_color
+            ? question.references?.join("\n\t")
+            : question.references?.map((r): string => black(r)).join("\n\t");
         console.log(`\t${references}`);
     }
 }
