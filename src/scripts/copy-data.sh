@@ -6,10 +6,10 @@ echo "[INFO] [START] Executing $0"
 
 DIR="../data/dist"
 DATA_DIR="../data"
-CLI_DIR="../cli"
-LIB_DIR="../lib"
-BLOG_DIR="../blog"
-SERVER_DIR="../server/src"
+CLI_DIR="../cli/data"
+LIB_DIR="../lib/data"
+BLOG_DIR="../blog/data"
+SERVER_DIR="../server/src/data"
 
 if [ ! -d ${DIR} ]; then
     echo "[INFO] Directory ${DIR} does not exist."
@@ -39,9 +39,9 @@ if [ ! -d ${SERVER_DIR} ]; then
 fi
 
 echo "[INFO] Directory ${DIR} exist. Copying."
-cp -r "${DIR}" "${CLI_DIR}/data"
-cp -r "${DIR}" "${LIB_DIR}/data"
-cp -r "${DIR}" "${BLOG_DIR}/data"
-cp -r "${DIR}" "${SERVER_DIR}/data"
+cp "${DIR}/questions.d.ts" "${DIR}/questions.js" "${DIR}/questions.d.ts.map" "${CLI_DIR}"
+cp "${DIR}/questions.d.ts" "${DIR}/questions.js" "${DIR}/questions.d.ts.map" "${LIB_DIR}"
+cp "${DIR}/questions.d.ts" "${DIR}/questions.js" "${DIR}/questions.d.ts.map" "${BLOG_DIR}"
+cp "${DIR}/questions.d.ts" "${DIR}/questions.js" "${DIR}/questions.d.ts.map" "${SERVER_DIR}"
 
 echo "[INFO] [DONE] Data successfully copied."

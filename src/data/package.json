@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "@f0c1s/ask-interviewers",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Questions you should/could ask your interviewers.",
   "main": "dist/index.js",
   "scripts": {
