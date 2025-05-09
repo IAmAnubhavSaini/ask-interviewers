@@ -12,6 +12,7 @@ Components:
 ## Documentation
 
 -   [tsconfig README](src/data/tsconfig.README.md)
+-   [cli README](src/cli/cli.README.md)
 
 ## Development
 
@@ -20,6 +21,9 @@ cd src/scripts
 ./generate-certs.sh
 ./copy-certs.sh
 ./copy-data.sh
+
+cd ../cli
+npm run dev
 ```
 
 ## License

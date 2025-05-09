@@ -3,14 +3,48 @@
 import type { tQuestionsEntity } from "./data/questions.d.ts";
 import { data } from "./data/questions.js";
 
-data.questions
-    .filter((question: tQuestionsEntity) => question.question.length > 0)
-    .map((question: tQuestionsEntity) => nonEmptyQuestion(question))
-    .map(prettyPrintQuestion);
+const priority = (process.argv[2] || "all").toLocaleLowerCase();
 
-function prettyPrintQuestion(question: Partial<tQuestionsEntity>): void {
+if (priority === "all") {
+    data.questions
+        .filter((question: tQuestionsEntity) => question.question.length > 0)
+        .map((question: tQuestionsEntity) => nonEmptyQuestion(question))
+        .map(prettyPrintQuestion);
+}
+if (priority === "high") {
+    data.questions
+        .filter((question: tQuestionsEntity) => question.question.length > 0 && question.priority === "High")
+        .map((question: tQuestionsEntity) => nonEmptyQuestion(question))
+        .map(prettyPrintQuestion);
+}
+if (priority === "mid") {
+    data.questions
+        .filter((question: tQuestionsEntity) => question.question.length > 0 && question.priority === "Mid")
+        .map((question: tQuestionsEntity) => nonEmptyQuestion(question))
+        .map(prettyPrintQuestion);
+}
+if (priority === "low") {
+    data.questions
+        .filter((question: tQuestionsEntity) => question.question.length > 0 && question.priority === "Low")
+        .map((question: tQuestionsEntity) => nonEmptyQuestion(question))
+        .map(prettyPrintQuestion);
+}
+if (priority === "no") {
+    data.questions
+        .filter((question: tQuestionsEntity) => question.question.length > 0 && question.priority === "No")
+        .map((question: tQuestionsEntity) => nonEmptyQuestion(question))
+        .map(prettyPrintQuestion);
+}
+if (priority === "x") {
+    data.questions
+        .filter((question: tQuestionsEntity) => question.question.length > 0 && question.priority === "unassigned")
+        .map((question: tQuestionsEntity) => nonEmptyQuestion(question))
+        .map(prettyPrintQuestion);
+}
+
+function prettyPrintQuestion(question: Partial<tQuestionsEntity>, index: number): void {
     console.log(`\n[${question.priority}]`);
-    console.log(`${question.question}`);
+    console.log(`${index + 1}. ${question.question}`);
     if (question.tags?.length ?? -1 > 0) {
         console.log(`\t${question.tags?.join(" ")}`);
     }
@@ -32,9 +66,6 @@ function nonEmptyQuestion(question: tQuestionsEntity): Partial<tQuestionsEntity>
     }
     if (question.references.length === 0) {
         delete out.references;
-    }
-    if (question.priority === "unassigned") {
-        delete out.priority;
     }
     if (question.tags.length === 0) {
         delete out.tags;
