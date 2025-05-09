@@ -1,6 +1,6 @@
 {
   "name": "ask-interviewers",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A CLI tool that provides a curated list of questions to ask during technical interviews",
   "main": "dist/cli.js",
   "bin": {
@@ -56,4 +56,4 @@
     "@types/node": "^22.15.17",
     "typescript": "^5.8.3"
   }
-} 
+}

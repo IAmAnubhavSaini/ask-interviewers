@@ -1,5 +1,14 @@
 # Ask Interviewers
 
+```bash 
+npm install --location=global ask-interviewers
+aski | less
+# OR 
+ask_interviewers | less
+# OR
+ask_questions | less
+```
+
 Goal: To help you understand the work environment, culture, and ethics of a potential employer.
 
 Components:

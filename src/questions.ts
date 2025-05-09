@@ -31,7 +31,7 @@ const data: tQuestions = {
         {
             question: "Could your manager step in and do your job if necessary?",
             potentialAnswers: [
-                "Yes (perhaps with some period of getting up to speed, etc.). Research shows that \"the benefit of having a highly competent boss is easily the largest positive influence on a typical worker's level of job satisfaction.\" Avoid working for non-technical management. Work for a manager who understands what their reports do, the complexity and level of effort of tasks, can help you with technical problems, can critically evaluate alternatives, and detect bullshit. Work where people are hired and promoted because they are capable and respected. Ideally every manager up to and including the CEO is technical.",
+                'Yes (perhaps with some period of getting up to speed, etc.). Research shows that "the benefit of having a highly competent boss is easily the largest positive influence on a typical worker\'s level of job satisfaction." Avoid working for non-technical management. Work for a manager who understands what their reports do, the complexity and level of effort of tasks, can help you with technical problems, can critically evaluate alternatives, and detect bullshit. Work where people are hired and promoted because they are capable and respected. Ideally every manager up to and including the CEO is technical.',
             ],
             followups: ["Could your manager's manager? The CEO?"],
             references: [
@@ -301,6 +301,24 @@ const data: tQuestions = {
             who: [],
         },
         {
+            question: "Does the company pay for books?",
+            references: [],
+            tags: ["#technical", "#culture"],
+            potentialAnswers: [],
+            followups: ["Does it pay for any books or just technical? What about digital?"],
+            priority: "Low",
+            who: [],
+        },
+        {
+            question: "Does the company pay for gym membership?",
+            references: [],
+            tags: ["#culture"],
+            potentialAnswers: [],
+            followups: ["Sports? What about fitness classes? Yoga?"],
+            priority: "Low",
+            who: [],
+        },
+        {
             question: "What do you use for a bug / task tracker?",
             potentialAnswers: ["They should have one."],
             followups: ["Is it up to date?"],
@@ -547,9 +565,9 @@ const data: tQuestions = {
             ],
             tags: ["#people"],
             who: ["#manager"],
-            followups: [],
+            followups: ["Is it paid by the company?", "What is the budget?", "What if it is 100% work related?"],
             references: [],
-            priority: "unassigned",
+            priority: "Low",
         },
         {
             question: "What's your idea of a good team?",
