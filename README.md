@@ -11,7 +11,16 @@ Components:
 
 ## Documentation
 
--   [tsconfig README](tsconfig.README.md)
+-   [tsconfig README](src/data/tsconfig.README.md)
+
+## Development
+
+```bash
+cd src/scripts
+./generate-certs.sh
+./copy-certs.sh
+./copy-data.sh
+```
 
 ## License
 
