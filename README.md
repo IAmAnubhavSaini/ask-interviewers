@@ -107,6 +107,8 @@ npm run build
     -   A nine year old project on GitLab. CC SA 4.0
 -   Panick when interviewers ask "Do you have any questions for me?" and then I scramble to make stuff up.
 -   Past experiences.
+-   [Medium article: Questions To Ask Your Interviewers](https://medium.com/@hello_92016/questions-to-ask-your-interviewers-5c6a7ddc4a13)
+    -   How do you answer “Do you have questions for me?”
 
 ## License
 
