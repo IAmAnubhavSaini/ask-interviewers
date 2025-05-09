@@ -1,6 +1,6 @@
 {
   "name": "ask-interviewers",
-  "version": "1.1.0",
+  "version": "1.3.0",
   "description": "A CLI tool that provides a curated list of questions to ask during technical interviews",
   "main": "dist/cli.js",
   "bin": {
@@ -10,8 +10,9 @@
   },
   "type": "module",
   "files": [
-    "dist",
-    "README.md"
+    "dist/",
+    "README.md",
+    "LICENSE"
   ],
   "scripts": {
     "dev": "node --experimental-transform-types src/cli.ts",
@@ -41,14 +42,7 @@
     "node": ">=24.0.0"
   },
   "dependencies": {
-    "@f0c1s/color-black": "*",
-    "@f0c1s/color-blue": "*",
-    "@f0c1s/color-cyan": "*",
-    "@f0c1s/color-green": "*",
-    "@f0c1s/color-magenta": "*",
-    "@f0c1s/color-red": "*",
-    "@f0c1s/color-white": "*",
-    "@f0c1s/color-yellow": "*",
+    "@f0c1s/random-colored-string": "^2026.0.0",
     "commander": "^12.0.0"
   },
   "devDependencies": {

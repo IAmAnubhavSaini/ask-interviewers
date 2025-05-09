@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { Command } from "commander";
-import { black, blue, cyan, green, magenta, red, white, yellow } from "./colors.js";
+import { blackSoft, blueSoft, cyanSoft, greenSoft, magentaSoft, redSoft, whiteSoft, yellowSoft } from "./colors.js";
 import type { tQuestionsEntity, tPriority } from "./questions.js";
 import { data } from "./questions.js";
 
@@ -13,19 +13,26 @@ program
     .option("-t, --tags <tags...>", "Filter by tags")
     .option("-w, --who <who...>", "Filter by who")
     .option("-a, --all", "Show all questions")
-    .option("-b, --no_color", "Disable colored output (bland)", false);
+    .option("-b, --no_color", "Disable colored output (bland)", false)
+    .option("-d, --debug", "Debug", false);
 
 program.parse();
 const options = program.opts();
 
-console.log({ options });
+if (options.debug) {
+    console.log({ options });
+}
 
-const qs = filterQuestions(data.questions, options);
-sortByPriority(qs)
+const filteredQuestions = filterQuestions(data.questions, options);
+if (options.debug) {
+    console.log({ filteredQuestions, data });
+}
+
+sortByPriority(filteredQuestions)
     .map((question: tQuestionsEntity) => nonEmptyQuestion(question))
     .forEach((question, index) => prettyPrintQuestion(question, index, options));
 
-export function filterQuestions(questions: tQuestionsEntity[], options: any): tQuestionsEntity[] {
+function filterQuestions(questions: tQuestionsEntity[], options: any): tQuestionsEntity[] {
     return questions
         .filter((question: tQuestionsEntity) => question.question.length > 0)
         .filter((question: tQuestionsEntity) => {
@@ -45,17 +52,17 @@ export function filterQuestions(questions: tQuestionsEntity[], options: any): tQ
 function getPriorityColor(priority: tPriority): string {
     switch (priority.toLocaleLowerCase()) {
         case "top":
-            return red(priority);
+            return redSoft(priority);
         case "high":
-            return yellow(priority);
+            return yellowSoft(priority);
         case "mid":
-            return blue(priority);
+            return blueSoft(priority);
         case "low":
-            return green(priority);
+            return greenSoft(priority);
         case "no":
-            return black(priority);
+            return blackSoft(priority);
         case "unassigned":
-            return white(priority);
+            return whiteSoft(priority);
         default:
             return priority;
     }
@@ -80,35 +87,31 @@ function getPriorityWeight(priority: tPriority): number {
     }
 }
 
-export function sortByPriority(questions: tQuestionsEntity[]): tQuestionsEntity[] {
+function sortByPriority(questions: tQuestionsEntity[]): tQuestionsEntity[] {
     return [...questions].sort((a, b) => getPriorityWeight(a.priority) - getPriorityWeight(b.priority));
 }
 
 function prettyPrintQuestion(question: Partial<tQuestionsEntity>, index: number, options: any): void {
-    const priority = options.no_color
-        ? question.priority
-        : getPriorityColor(question.priority as tPriority) ;
+    const priority = options.no_color ? question.priority : getPriorityColor(question.priority as tPriority);
     console.log(`\n[${priority}]`);
     console.log(`${index + 1}. ${question.question}`);
 
     if (question.tags?.length ?? -1 > 0) {
-        const tags = options.no_color
-            ? question.tags?.join(" ") ?? ""
-            : cyan(question.tags?.join(" ") ?? "") ;
+        const tags = options.no_color ? question.tags?.join(" ") ?? "" : cyanSoft(question.tags?.join(" ") ?? "");
         console.log(`\t${tags}`);
     }
 
     if (question.followups?.length ?? -1 > 0) {
         const followups = options.no_color
             ? question.followups?.join("\n\t")
-            : question.followups?.map((f): string => magenta(f)).join("\n\t");
+            : question.followups?.map((f): string => magentaSoft(f)).join("\n\t");
         console.log(`\t${followups}`);
     }
 
     if (question.references?.length ?? -1 > 0) {
         const references = options.no_color
             ? question.references?.join("\n\t")
-            : question.references?.map((r): string => black(r)).join("\n\t");
+            : question.references?.map((r): string => blackSoft(r)).join("\n\t");
         console.log(`\t${references}`);
     }
 }
