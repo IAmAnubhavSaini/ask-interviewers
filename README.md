@@ -11,26 +11,80 @@ Components:
 
 ## Documentation
 
--   [tsconfig README](src/data/tsconfig.README.md)
--   [cli README](src/cli/cli.README.md)
+-   [tsconfig README](tsconfig.README.md)
+-   [articles mentioned in questions.ts](articles.md)
 
 ## Development
 
 ```bash
-cd src/scripts
+cd src
+# chmod u+x ./generate-certs.sh
 ./generate-certs.sh
-./copy-certs.sh
-./copy-data.sh
 
-cd ../cli
-npm run dev
+# for building source code
+npm run build
+# link for cli app
+npm link
+
 ```
 
-## License
+## cli: ask_questions | aski | ask_interviewers
 
-MIT License
+A CLI tool for interview questions that helps you prepare for technical interviews by providing a curated list of questions to ask interviewers.
 
-Copyright (c) 2025 Anubhav Saini
+### Requirements
+
+-   Node.js version 24+
+    -   `--experimental-transform-types` needs to be supported.
+
+### Installation
+
+```bash
+npm install
+npm run build
+npm run dev
+
+# Install globally
+npm link
+```
+
+### Usage
+
+```bash
+# Show all questions
+ask_questions
+
+# Filter by priority (Top, High, Mid, Low, No, unassigned)
+ask_questions --priority High
+
+# Filter by tags
+ask_questions --tags culture process
+
+# Filter by who (engineer, manager, executive, hr)
+ask_questions --who engineer
+
+# Combine filters
+ask_questions --priority High --tags culture --who engineer
+
+# Disable colored output
+ask_questions --no-color
+```
+
+### Features
+
+-   Questions are automatically sorted by priority (Top > High > Mid > Low > No > unassigned)
+-   Color-coded output for better readability
+-   Filter questions by:
+    -   Priority
+    -   Tags (#process, #culture, #people, #technical, #management, #hiring, #issues, #feedback)
+    -   Who (#engineer, #manager, #executive, #hr)
+
+### Build
+
+```bash
+npm run build
+# Output files will be in `/src/cli/dist`
+```
 
 ## Inspirations
 
@@ -38,3 +92,9 @@ Copyright (c) 2025 Anubhav Saini
     -   A nine year old project on GitLab. CC SA 4.0
 -   Panick when interviewers ask "Do you have any questions for me?" and then I scramble to make stuff up.
 -   Past experiences.
+
+## License
+
+MIT License | [LICENSE](LICENSE)
+
+Copyright (c) 2025 Anubhav Saini

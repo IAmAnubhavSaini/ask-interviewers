@@ -2,8 +2,8 @@
 
 import { Command } from "commander";
 import { black, blue, cyan, green, magenta, red, white, yellow } from "./colors.js";
-import type { tQuestionsEntity, tPriority } from "../data/questions.d.ts";
-import { data } from "../data/questions.js";
+import type { tQuestionsEntity, tPriority } from "./data/questions.d.ts";
+import { data } from "./data/questions.js";
 
 
 const program = new Command();

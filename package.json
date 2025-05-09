@@ -2,11 +2,11 @@
   "name": "ask-interviewers",
   "version": "1.0.0",
   "description": "A CLI tool that provides a curated list of questions to ask during technical interviews",
-  "main": "dist/cli/cli.js",
+  "main": "dist/cli.js",
   "bin": {
-    "aski": "./dist/cli/cli.js",
-    "ask_questions": "./dist/cli/cli.js",
-    "ask_interviewers": "./dist/cli/cli.js"
+    "aski": "./dist/cli.js",
+    "ask_questions": "./dist/cli.js",
+    "ask_interviewers": "./dist/cli.js"
   },
   "type": "module",
   "files": [
@@ -14,8 +14,8 @@
     "README.md"
   ],
   "scripts": {
-    "dev": "node --experimental-transform-types cli.ts",
-    "build": "npm run clean && ./node_modules/.bin/tsc --build tsconfig.json",
+    "dev": "node --experimental-transform-types src/cli.ts",
+    "build": "npm run clean && tsc --build tsconfig.json",
     "prepublishOnly": "npm run build",
     "clean": "rm -rf dist"
   },
@@ -56,4 +56,4 @@
     "@types/node": "^22.15.17",
     "typescript": "^5.8.3"
   }
-}
+} 

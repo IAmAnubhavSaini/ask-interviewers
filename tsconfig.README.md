@@ -23,6 +23,3 @@ A list of directories or files.
 
 A list of directories or files.
 
-## Not compiling /src/blog because we wnat an app there
-
-That is made possible via `include` and `exclude` properties in tsconfig.json; and only reason, so far, for this file to exist.
