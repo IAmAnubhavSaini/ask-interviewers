@@ -39,9 +39,9 @@ if [ ! -d ${SERVER_DIR} ]; then
 fi
 
 echo "[INFO] Directory ${DIR} exist. Copying."
-cp -r "${DIR}" "${CLI_DIR}/data/"
-cp -r "${DIR}" "${LIB_DIR}/data/"
-cp -r "${DIR}" "${BLOG_DIR}/data/"
-cp -r "${DIR}" "${SERVER_DIR}/data/"
+cp -r "${DIR}" "${CLI_DIR}/data"
+cp -r "${DIR}" "${LIB_DIR}/data"
+cp -r "${DIR}" "${BLOG_DIR}/data"
+cp -r "${DIR}" "${SERVER_DIR}/data"
 
 echo "[INFO] [DONE] Data successfully copied."
