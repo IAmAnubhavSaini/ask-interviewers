@@ -9,7 +9,8 @@ npm run dev
 
 ## install
 npm link
-ask_questions
+ask_questions # for all questions
+ask_questions high for
 
 ## build
 npm run build
